@@ -59,7 +59,7 @@ function App() {
       .catch(() => alert("Impossible de copier l'adresse."));
   }
 
-  // --- 2. ANALYSE VIA L'IA (API PYTHON) ---
+  // --- 2. ANALYSE VIA L'IA (API PYTHON SUR RENDER) ---
   async function simulateScore() {
     if (!amount || Number(amount) <= 0) {
       alert("Veuillez saisir un montant valide.");
@@ -70,12 +70,12 @@ function App() {
     setTxHash(null);
 
     try {
-      // Appel à ton API Python FastAPI
-      const response = await fetch("https://credit-score-api-0jdu.onrender.com/predict", { ... })
+      // Appel à ton API Python FastAPI sur Render
+      const response = await fetch("https://credit-score-api-0jdu.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          regularite_depots: 0.8, // Valeurs simulées pour le test
+          regularite_depots: 0.8,
           montant_moyen: 5000,
           remboursements_a_temps: 0.9
         })
@@ -103,7 +103,7 @@ function App() {
 
     } catch (error) {
       console.error(error);
-      alert("Impossible de contacter l'API IA. Le serveur Python est-il lancé ?");
+      alert("Impossible de contacter l'API IA. Le serveur Render est peut-être en train de se réveiller (attendez 30s et réessayez).");
     } finally {
       setIsAnalyzing(false);
     }
@@ -239,13 +239,13 @@ function App() {
                 
                 {score > 70 ? (
                   <>
-                    <p style={{color: "green"}}>✅ Éligible au prêt</p>
+                    <p style={{color: "green", fontWeight: "bold"}}>✅ Éligible au prêt</p>
                     <button className="primary-button" style={{marginTop: "10px", backgroundColor: "#28a745"}} onClick={enregistrerPretBlockchain} disabled={isSaving}>
                       {isSaving ? "Transaction en cours..." : "Enregistrer sur la Blockchain"}
                     </button>
                   </>
                 ) : (
-                  <p style={{color: "red"}}>❌ Score insuffisant (minimum 70)</p>
+                  <p style={{color: "red", fontWeight: "bold"}}>❌ Score insuffisant (minimum 70)</p>
                 )}
 
                 {txHash && (
