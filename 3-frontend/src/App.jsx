@@ -70,9 +70,8 @@ function App() {
     setTxHash(null);
 
     try {
-      // ⚠️ Utilisation de la variable d'environnement Vite
-      // L'URL est définie sur Vercel dans les Settings > Environment Variables
-      const apiUrl = import.meta.env.VITE_API_URL || "https://credit-score-api-0jdu.onrender.com";
+      // ⚠️ URL DE RENDER EN DUR (Pas de variable d'environnement)
+      const apiUrl = "https://credit-score-api-0jdu.onrender.com";
       
       const response = await fetch(`${apiUrl}/predict`, {
         method: "POST",
