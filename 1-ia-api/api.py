@@ -10,9 +10,9 @@ app = FastAPI()
 # --- NOUVEAU : Configuration CORS ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], # L'adresse de ton Vite
+    allow_origins=["*"], # ⚠️ Pour un TP c'est OK. En vrai, on mettrait l'URL exacte de Vercel.
     allow_credentials=True,
-    allow_methods=["*"], # Autorise toutes les méthodes (GET, POST, OPTIONS...)
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 # ------------------------------------
