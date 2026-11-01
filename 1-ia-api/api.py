@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware  # <-- NOUVEAU
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pickle
 import numpy as np
@@ -7,15 +7,15 @@ import shap
 
 app = FastAPI()
 
-# --- NOUVEAU : Configuration CORS ---
+# --- CORRECTION CORS ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # ⚠️ Pour un TP c'est OK. En vrai, on mettrait l'URL exacte de Vercel.
-    allow_credentials=True,
+    allow_origins=["*"],       # Autorise toutes les origines (Vercel, localhost, etc.)
+    allow_credentials=False,   # ⚠️ DOIT ÊTRE FALSE quand on utilise "*"
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# ------------------------------------
+# -----------------------
 
 # Charger le modèle
 with open('model.pkl', 'rb') as f:
