@@ -6,16 +6,13 @@ import numpy as np
 import shap
 
 app = FastAPI()
-
-# --- CORRECTION CORS ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       # Autorise toutes les origines (Vercel, localhost, etc.)
-    allow_credentials=False,   # ⚠️ DOIT ÊTRE FALSE quand on utilise "*"
+    allow_origins=["*"],       # Autorise tout le monde
+    allow_credentials=False,   # ⚠️ DOIT ÊTRE FALSE
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# -----------------------
 
 # Charger le modèle
 with open('model.pkl', 'rb') as f:
