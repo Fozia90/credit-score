@@ -70,8 +70,11 @@ function App() {
     setTxHash(null);
 
     try {
-      // Appel à ton API Python FastAPI sur Render
-      const response = await fetch("https://credit-score-api-0jdu.onrender.com/predict", {
+      // ⚠️ Utilisation de la variable d'environnement Vite
+      // L'URL est définie sur Vercel dans les Settings > Environment Variables
+      const apiUrl = import.meta.env.VITE_API_URL || "https://credit-score-api-0jdu.onrender.com";
+      
+      const response = await fetch(`${apiUrl}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
